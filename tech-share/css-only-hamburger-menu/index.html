@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <!-- 正しく設定しないと文字化けする -->
+    <meta charset="UTF-8">
+    <!-- レスポンシブ対応させるため -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 検索結果に表示される説明 -->
+    <meta name="description" content="WEBページの説明文">
+
+    <!-- ブラウザのタブに表示される名前 -->
+    <title>WEBサイト制作の技術シェア</title>
+
+    <!-- ファビコンの設定 -->
+    <link rel="icon" href="img/logo5.svg">
+
+    <!-- リセットCSSの読み込み -->
+    <link rel="stylesheet" href="css/destyle.css">
+
+    <!-- Googleフォントの読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Noto Serif JPの読み込み -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap" rel="stylesheet">
+
+    <!-- コードブロックデザインCSS -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+    <!-- 共通CSSの読み込み -->
+    <link rel="stylesheet" href="css/common.css">
+
+    <!-- 個別CSSの読み込み -->
+    <link rel="stylesheet" href="css/top.css">
+
+
+</head>
+
+<body>
+    <!-- 背景色 -->
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+
+    <header>
+        <div class="logo">
+            <a href="#">
+                <img src="img/logo5.svg" alt="mylogo">
+            </a>
+        </div>
+
+        <div class="hamburger-menu">
+            <input type="checkbox" id="menu-btn-check">
+            <label for="menu-btn-check" class="menu-btn"><span></span></label>
+            <!--ここからメニュー-->
+            <nav class="menu-content">
+                <ul>
+                    <li>
+                        <a href="#">topic1</a>
+                    </li>
+                    <li>
+                        <a href="../srider/index.html">topic2</a>
+                    </li>
+                    <li>
+                        <a href="#">topic3</a>
+                    </li>
+                    <li>
+                        <a href="#">topic4</a>
+                    </li>
+                </ul>
+            </nav>
+            <!--ここまでメニュー-->
+        </div>
+    </header>
+
+    <main>
+        <div class="wrap">
+            <h1 class="title">WEBサイト制作の<span class="nowrap">技術シェア</span></h1>
+
+            <section>
+                <h2 class="section-title">今回伝えたいこと</h2>
+                <div class="sub-title">
+                    <p><strong>JavaScriptを使用せずにCSSだけで「ハンバーガーメニュー」を作る方法</strong></p>
+                </div>
+                <p>レスポンシブデザインにおいて、ブラウザの幅がスマートフォンサイズになった際に、ナビゲーションを効率的に格納するハンバーガーメニューの導入は一般的です。<br>今回は、JavaScriptを一切使用せず、CSSとHTMLのみでこのハンバーガーメニューを実装する方法をご紹介します。
+                </p>
+            </section>
+
+            <section>
+                <h2 class="section-title">テーマを決めた背景</h2>
+                <p>Web制作の学習を進める中で、デザインカンプから実際にレスポンシブなWebサイトを制作する課題に取り組みました。この際、スマートフォン表示でのハンバーガーメニューの実装が必要になりました。<br>一般的にハンバーガーメニューはJavaScript（JS）を用いて開閉を制御しますが、調査を進める中で、CSSの機能だけでもこれを実現できることを知りました。<br>今回は、その時に学んだ「JSを使用しない、CSSのみで実装するハンバーガーメニュー」の方法を皆さんと共有したいと思います。この手法は、シンプルな仕組みでメニュー開閉を実現でき、JSの知識がない方でもレスポンシブデザインの基礎を学ぶ上で非常に役立つと思います。
+                </p>
+            </section>
+
+
+            <section>
+                <h2 class="section-title">技術内容</h2>
+                <div class="codepen">
+                    <p class="codepen" data-height="600" data-default-tab="html" data-slug-hash="RNaRBqO"
+                        data-pen-title="Untitled" data-user="daisuke-the-sans"
+                        style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                        <span>See the Pen <a href="https://codepen.io/daisuke-the-sans/pen/RNaRBqO">
+                                Untitled</a> by daisuke (<a
+                                href="https://codepen.io/daisuke-the-sans">@daisuke-the-sans</a>)
+                            on <a href="https://codepen.io">CodePen</a>.</span>
+                    </p>
+                    <script async src="https://public.codepenassets.com/embed/index.js"></script>
+                </div>
+
+
+                <!-- ====================================================== -->
+                <!-- 技術内容を細分化して説明 -->
+                <!-- ====================================================== -->
+
+
+                <!-- ボタン実装詳細 -->
+                <article>
+                    <h3 class="article-title">①ボタンの実装</h3>
+                    <p>まずは3本線のよく見るハンバーガーボタンを実装します。</p>
+                    <!-- htmlのコード -->
+                    <p>HTML</p>
+                    <pre class="pre-html"><code class="language-html">
+        &lt;div class="hamburger-menu"&gt;
+            &lt;input type="checkbox" id="menu-btn-check"&gt;
+            &lt;label for="menu-btn-check" class="menu-btn"&gt;&lt;span&gt;&lt;/span&gt;&lt;/label&gt;
+            </code></pre>
+
+                    <!-- CSSのコード -->
+                    <p>CSS</p>
+                    <pre><code class="language-css">
+        .menu-btn {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        display: flex;
+        height: 60px;
+        width: 60px;
+        justify-content: center;
+        align-items: center;
+        z-index: 90;
+        background-color: #3584bb;
+        }
+        
+        .menu-btn span,
+        .menu-btn span:before,
+        .menu-btn span:after {
+        content: '';
+        display: block;
+        height: 3px;
+        width: 25px;
+        border-radius: 3px;
+        background-color: #ffffff;
+        position: absolute;
+        }
+        
+        .menu-btn span:before {
+        bottom: 8px;
+        }
+        
+        .menu-btn span:after {
+        top: 8px;
+        }
+
+        #menu-btn-check:checked~.menu-btn span {
+        background-color: rgba(255, 255, 255, 0);
+        /*メニューオープン時は真ん中の線を透明にする*/
+        }
+        
+        #menu-btn-check:checked~.menu-btn span::before {
+        bottom: 0;
+        transform: rotate(45deg);
+        }
+        
+        #menu-btn-check:checked~.menu-btn span::after {
+        top: 0;
+        transform: rotate(-45deg);
+        }
+        
+        #menu-btn-check {
+        display: none;
+        }
+        </code></pre>
+
+                    <ul class="process">
+                        <li>
+                            ボタンが押されたかの判断は、checkboxで判断します。
+                        </li>
+                        <li>
+                            position:fixed;でスクロールしてもついてくるように固定します。
+                        </li>
+                        <li>
+                            アイコンはspanタグを疑似要素(before,after)と絶対配置(position:absolute;)を用いて上下に分けて3本線を作ります。
+                        </li>
+                        <li>
+                            間接セレクタ(~)で、ある要素がチェックされたらその後ろにある別の要素の見た目を変更するという操作を行います。具体的には真ん中の線を消して上下の線をバツ印に変形させます。
+                        </li>
+                        <li>
+                            画面上に出てくるcheckboxを見えないように消します。
+                        </li>
+                    </ul>
+                </article>
+
+                <!-- メニュー部分詳細 -->
+                <article>
+                    <h3 class="article-title">②メニュー部分の実装</h3>
+                    <p>先ほどのHTMLに追加してメニュー部分を実装していきます。</p>
+                    <p>HTML</p>
+                    <pre class="pre-html"><code class="language-html">
+                &lt;div class="hamburger-menu"&gt;
+                    &lt;input type="checkbox" id="menu-btn-check"&gt;
+                    &lt;label for="menu-btn-check" class="menu-btn"&gt;&lt;span&gt;&lt;/span&gt;&lt;/label&gt;
+                    &lt;!--ここからメニュー--&gt;
+                    &lt;div class="menu-content"&gt;
+                        &lt;ul&gt;
+                            &lt;li&gt;
+                                &lt;a href="#"&gt;メニューリンク1&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a href="#"&gt;メニューリンク2&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a href="#"&gt;メニューリンク3&lt;/a&gt;
+                            &lt;/li&gt;
+                        &lt;/ul&gt;
+                    &lt;/div&gt;
+                    &lt;!--ここまでメニュー--&gt;
+                &lt;/div&gt;
+                </code></pre>
+
+                    <p>CSS</p>
+                    <pre><code class="language-css">
+        .menu-content {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 100%;/*leftの値を変更してメニューを画面外へ*/
+        z-index: 80;
+        background-color: #3584bb;
+        transition: all 0.5s;/*アニメーション設定*/
+        }
+        .menu-content ul {
+        padding: 70px 10px 0;
+        }
+        
+        .menu-content ul li {
+        border-bottom: solid 1px #ffffff;
+        list-style: none;
+        }
+        
+        .menu-content ul li a {
+        display: block;
+        width: 100%;
+        font-size: 15px;
+        box-sizing: border-box;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 9px 15px 10px 0;
+        position: relative;
+        }
+        
+        #menu-btn-check:checked~.menu-content {
+        left: 0;
+        /*メニューを画面内へ*/
+        }
+        </code></pre>
+                    <ul class="process">
+                        <li>
+                            position:fixed;でスクロールしてもついてくるように固定します。
+                        </li>
+                        <li>
+                            z-indexをボタンよりも小さくして背面にもってきます。
+                        </li>
+                        <li>
+                            本来は左上にいるがハンバーガーボタンを押していないときは隠しておきたいため、left 100%で右の画面外に隠します。
+                        </li>
+                        <li>
+                            ボタンを押したときに、右からスライドして出てきてほしいため間接セレクタと、transitionを入れている。
+                        </li>
+                    </ul>
+                </article>
+            </section>
+
+            <section>
+                <h2 class="section-title">課題点</h2>
+                <p>CSSのみでボタンをつくる上での課題点は、checkboxにフォーカスするという構造上、"開く閉じる"の制御が柔軟にできない。また、アニメーションをCSSだけで付与する際にcheckedの切り替えだけでは意図通りに動かず複雑なモーションが困難であることなどがあげられます。
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="f-wrap">
+            <nav class="f-nav">
+                <ul>
+                    <li><a href="#">topic1</a></li>
+                    <li><a href="#">topic2</a></li>
+                    <li><a href="#">topic3</a></li>
+                    <li><a href="#">topic4</a></li>
+                </ul>
+            </nav>
+            <p class="f-copy"><small>&copy; 2025 DAISUKE TAKETOMI</small></p>
+        </div>
+
+
+    </footer>
+
+
+    <!-- ハイライト処理JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <!-- ページ初期化JS -->
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
