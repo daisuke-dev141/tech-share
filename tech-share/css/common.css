@@ -1,0 +1,296 @@
+@charset "utf-8";
+
+/* ==================== */
+/* base */
+/* ==================== */
+
+html {
+    font-size: 10px;
+    font-family: "Times New Roman", "Noto Serif JP", serif;
+}
+
+body {
+    font-weight: 500;
+    font-size: 1.8rem;
+}
+
+h1,
+h2,
+h3 {
+    font-weight: 600;
+}
+
+p {
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    display: block;
+}
+
+
+/* ==================== */
+/* header */
+/* ==================== */
+
+header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+
+    height: 100px;
+}
+
+.logo {
+    width: 50px;
+    margin-left: 25px;
+}
+
+/* ハンバーガーボタン */
+.menu-btn {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    display: flex;
+    height: 48px;
+    width: 48px;
+    justify-content: center;
+    align-items: center;
+    z-index: 90;
+    border-radius: 100%;
+    background-image: linear-gradient(#8dd1e9, #0e4875);
+}
+
+.menu-btn span,
+.menu-btn span:before,
+.menu-btn span:after {
+    content: '';
+    display: block;
+    height: 3px;
+    width: 25px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    position: absolute;
+}
+
+.menu-btn span:before {
+    bottom: 8px;
+}
+
+.menu-btn span:after {
+    top: 8px;
+}
+
+#menu-btn-check:checked~.menu-btn span {
+    background-color: rgba(255, 255, 255, 0);
+    /*メニューオープン時は真ん中の線を透明にする*/
+}
+
+#menu-btn-check:checked~.menu-btn span::before {
+    bottom: 0;
+    transform: rotate(45deg);
+}
+
+#menu-btn-check:checked~.menu-btn span::after {
+    top: 0;
+    transform: rotate(-45deg);
+}
+
+#menu-btn-check {
+    display: none;
+}
+
+.menu-content {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    /* 本来の位置 left: 0; */
+    left: 100%;
+    /*leftの値を変更してメニューを画面外へ*/
+    z-index: 80;
+    background-color: #3584bb;
+    transition: all 0.5s;
+    /*アニメーション設定*/
+}
+
+.menu-content ul {
+    padding: 70px 10px 0;
+}
+
+.menu-content ul li {
+    border-bottom: solid 1px #ffffff;
+    list-style: none;
+}
+
+.menu-content ul li a {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 9px 15px 10px 0;
+    position: relative;
+}
+
+/* .menu-content ul li a::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-top: solid 2px #ffffff;
+    border-right: solid 2px #ffffff;
+    transform: rotate(45deg);
+    position: absolute;
+    right: 11px;
+    top: 16px;
+} */
+
+#menu-btn-check:checked~.menu-content {
+    left: 0;
+    /*メニューを画面内へ*/
+}
+
+@media screen and (min-width:768px) {
+    .logo {
+        width: 70px;
+        margin-left: 120px;
+    }
+
+    /* ロゴ要素にトランジション（アニメーション）を設定 */
+    .logo {
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        /* transitionプロパティを必ず追加することで、滑らかに変化します */
+    }
+
+    /* ロゴ要素がホバーされたとき */
+    .logo:hover {
+        /* 1. 透明度を少し下げる */
+        opacity: 0.7;
+
+        /* 2. わずかに拡大する (オプション) */
+        transform: scale(1.03);
+
+        /* 3. マウスポインターを指の形にする */
+    }
+
+    /* ハンバーガー解除 */
+    #menu-btn-check,
+    .menu-btn {
+        display: none;
+    }
+
+    .menu-content {
+        position: static;
+        width: auto;
+        height: auto;
+        background: none;
+        left: auto;
+        transition: none;
+    }
+
+    .menu-content ul {
+        display: flex;
+        gap: 37px;
+        padding: 0;
+    }
+
+
+    .menu-content ul li a {
+        color: #000;
+        text-decoration: none;
+        font-weight: bold;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .hamburger-menu {
+        margin-right: 120px;
+    }
+
+    .menu-content ul li a {
+        padding-bottom: 3px;
+        /* テキストと下線の間隔 */
+        background-image: linear-gradient(#000, #000);
+        background-repeat: no-repeat;
+        background-position: bottom right;
+        /* 下線の初期位置 */
+        background-size: 0 1px;
+        /* 下線のサイズ（横幅、高さ） */
+        transition: background-size 0.3s;
+    }
+
+    .menu-content ul li a:hover {
+        background-position: bottom left;
+        /* 下線のホバー時位置 */
+        background-size: 100% 1px;
+        /* 下線の横幅を100%にする */
+    }
+
+}
+
+/* ==================== */
+/* footer */
+/* ==================== */
+footer {
+    background-color: #fff;
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+.f-nav {
+    display: none;
+}
+
+.f-copy {
+    text-align: center;
+}
+
+@media screen and (min-width:768px) {
+
+    .f-nav {
+        display: block;
+        margin-bottom: 20px;
+    }
+
+    .f-nav ul {
+        display: flex;
+        justify-content: flex-start;
+        gap: 37px;
+        margin-left: 200px;
+    }
+
+
+    .f-nav ul li a {
+        font-weight: bold;
+        padding: 10px 10px 3px;
+    }
+
+
+    .f-nav ul li a {
+        padding-bottom: 3px;
+        /* テキストと下線の間隔 */
+        background-image: linear-gradient(#000, #000);
+        background-repeat: no-repeat;
+        background-position: bottom right;
+        /* 下線の初期位置 */
+        background-size: 0 1px;
+        /* 下線のサイズ（横幅、高さ） */
+        transition: background-size 0.3s;
+    }
+
+    .f-nav ul li a:hover {
+        background-position: bottom left;
+        /* 下線のホバー時位置 */
+        background-size: 100% 1px;
+        /* 下線の横幅を100%にする */
+    }
+}

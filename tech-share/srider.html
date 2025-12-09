@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <!-- 正しく設定しないと文字化けする -->
+    <meta charset="UTF-8">
+    <!-- レスポンシブ対応させるため -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 検索結果に表示される説明 -->
+    <meta name="description" content="WEBページの説明文">
+
+    <!-- ブラウザのタブに表示される名前 -->
+    <title>WEBサイト制作の技術シェア</title>
+
+    <!-- ファビコンの設定 -->
+    <link rel="icon" href="img/logo5.svg">
+
+    <!-- リセットCSSの読み込み -->
+    <link rel="stylesheet" href="css/destyle.css">
+
+    <!-- Googleフォントの読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Noto Serif JPの読み込み -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap" rel="stylesheet">
+
+    <!-- コードブロックデザインCSS -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+    <!-- swiper.jsの読み込み -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+
+    <!-- 共通CSSの読み込み -->
+    <link rel="stylesheet" href="css/common.css">
+
+    <!-- 個別CSSの読み込み -->
+    <link rel="stylesheet" href="css/srider.css">
+
+
+
+
+
+
+</head>
+
+<body>
+    <!-- 背景色 -->
+    <div class="snowflakes" aria-hidden="true">
+
+        <div class="snowflake">
+            ❅
+        </div>
+        <div class="snowflake">
+            ❅
+        </div>
+        <div class="snowflake">
+            ❆
+        </div>
+        <div class="snowflake">
+            ❄
+        </div>
+        <div class="snowflake">
+            ❅
+        </div>
+        <div class="snowflake">
+            ❆
+        </div>
+        <div class="snowflake">
+            ❄
+        </div>
+        <div class="snowflake">
+            ❅
+        </div>
+        <div class="snowflake">
+            ❆
+        </div>
+        <div class="snowflake">
+            ❄
+        </div>
+    </div>
+
+
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="img/logo5.svg" alt="mylogo">
+            </a>
+        </div>
+
+        <div class="hamburger-menu">
+            <input type="checkbox" id="menu-btn-check">
+            <label for="menu-btn-check" class="menu-btn"><span></span></label>
+            <!--ここからメニュー-->
+            <nav class="menu-content">
+                <ul>
+                    <li>
+                        <a href="css-only-hamburger-menu.html">topic1</a>
+                    </li>
+                    <li>
+                        <a href="#">topic2</a>
+                    </li>
+                    <li>
+                        <a href="#">topic3</a>
+                    </li>
+                    <li>
+                        <a href="#">topic4</a>
+                    </li>
+                </ul>
+            </nav>
+            <!--ここまでメニュー-->
+        </div>
+    </header>
+
+    <main>
+        <div class="wrap">
+            <h1 class="title">Swiper.jsを用いた<span class="nowrap">スライダーの実装方法</span></h1>
+
+            <section>
+                <h2 class="section-title">◎今回伝えたいこと</h2>
+
+                <p>JavaScriptライブラリを用いることにより必要な機能の簡易実装が可能です。また、他ライブラリとのモバイルファーストにおける差別化が挙げられるため今回紹介します。
+                </p>
+            </section>
+
+            <section>
+                <h2 class="section-title">◎テーマを決めた背景</h2>
+                <p>Webサイトに写真やコンテンツをきれいに見せるための「スライダー」は欠かせません。他の方法でスライダーを自力で作ろうとすると、スマホでの操作や動きを滑らかにするのがとても難しいです。そこで、Swiper.jsというライブラリを使えば、難しい設定なしに、スマホのタッチ操作にもしっかり対応した、動きの良いスライダーを簡単に作れるようになるので、技術シェアのテーマとして選びました。
+                </p>
+            </section>
+
+            <section>
+                <h2 class="section-title">◎技術内容</h2>
+
+                <!-- 導入方法 -->
+                <article>
+                    <h3 class="article-title">◆swiperの導入方法</h3>
+                    <p>今回はCDNでライブラリを読み込みます。(ダウンロードする方法もあります。) <br>
+                        linkタグのコードはhead内に記入し、scriptタグのコードはbodyの終わる直前に書きます。</p>
+                    <pre><code class="language-html">
+        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/swiper@7/swiper-bundle.min.css&quot; /&gt;
+        &lt;script src=&quot;https://unpkg.com/swiper@7/swiper-bundle.min.js&quot;&gt;&lt;/script&gt;
+                    </code></pre>
+                </article>
+
+                <!-- 基本的な書き方 -->
+                <article>
+                    <h3 class="article-title">◆swiperの基本的な書き方</h3>
+                    <p>一番シンプルなスライダーを書きていきます。</p>
+                    <!-- htmlのコード -->
+                    <p>HTML</p>
+                    <pre><code class="language-html">
+        &lt;div class=&quot;swiper&quot;&gt;
+          &lt;div class=&quot;swiper-wrapper&quot;&gt;
+            &lt;div class=&quot;swiper-slide&quot;&gt;
+              &lt;img src=&quot;画像パス&quot; alt=&quot;&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;swiper-slide&quot;&gt;
+              &lt;img src=&quot;画像パス&quot; alt=&quot;&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;swiper-slide&quot;&gt;
+              &lt;img src=&quot;画像パス&quot; alt=&quot;&quot; /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        </code></pre>
+
+                    <p>※注意点<br>
+                        <span class="emphasis">class名を変えると動かないので注意！！</span>
+                    </p>
+                    <!-- CSSのコード -->
+                    <p>CSS</p>
+                    <pre><code class="language-css">
+        .swiper-slide img {
+        height: auto;
+        width: 100%;
+        }
+        </code></pre>
+
+                    <!-- jsのコード -->
+                    <p>JavaScript</p>
+                    <pre><code class="language-javascript">
+        const swiper = new Swiper(&quot;.swiper&quot;, {});
+                    </code></pre>
+
+                    <p>上記の3つを合わせると下のスライダーになります。</p>
+                    <p class="codepen" data-height="600" data-default-tab="js" data-slug-hash="KwzryXM"
+                        data-pen-title="Untitled" data-user="daisuke-the-sans"
+                        style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                        <span>See the Pen <a href="https://codepen.io/daisuke-the-sans/pen/KwzryXM">
+                                Untitled</a> by daisuke (<a
+                                href="https://codepen.io/daisuke-the-sans">@daisuke-the-sans</a>)
+                            on <a href="https://codepen.io">CodePen</a>.</span>
+                    </p>
+                    <script async src="https://public.codepenassets.com/embed/index.js"></script>
+
+                </article>
+
+                <!-- オプションの追加 -->
+                <article>
+                    <h3 class="article-title">◆オプションの追加</h3>
+                    <p>オプションにはパラメーターとモジュールがあり以下の様に書きます。</p>
+                    <p>JavaScript</p>
+                    <pre><code class="language-javascript">
+        const swiper = new Swiper(&quot;.swiper&quot;, {
+          パラメータ名1: 設定値,
+          パラメータ名2: 設定値,
+          モジュール名1: {
+            パラメータ名A: 設定値,
+            パラメータ名B: 設定値,
+          },
+        });
+        </code></pre>
+
+
+                    <p class="codepen" data-height="600" data-default-tab="html,result" data-slug-hash="ogxQEKp"
+                        data-pen-title="Untitled" data-user="daisuke-the-sans"
+                        style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                        <span>See the Pen <a href="https://codepen.io/daisuke-the-sans/pen/ogxQEKp">
+                                Untitled</a> by daisuke (<a
+                                href="https://codepen.io/daisuke-the-sans">@daisuke-the-sans</a>)
+                            on <a href="https://codepen.io">CodePen</a>.</span>
+                    </p>
+                    <script async src="https://public.codepenassets.com/embed/index.js"></script>
+
+
+                    <ul class="process">
+                        <li>
+                            ループ
+                            <pre><code class="language-javascript">
+        loop: true, // デフォルトはfalse
+                            </code></pre>
+                        </li>
+                        <li>
+                            フェイド
+                            <pre><code class="language-javascript">
+        effect: 'fade', // フェード
+        </code></pre>
+                        </li>
+                        <li>
+                            前後の矢印(ナビゲーション)
+                            <pre><code class="language-html">
+        &lt;div class=&quot;swiper-button-prev&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;swiper-button-next&quot;&gt;&lt;/div&gt;
+        </code></pre>
+                            <pre><code class="language-javascript">
+        // 前後の矢印
+          navigation: {
+            nextEl: &quot;.swiper-button-next&quot;,
+            prevEl: &quot;.swiper-button-prev&quot;,
+          },
+        </code></pre>
+                        </li>
+                        <li>
+                            ドットインジケーター(ページネーション)
+                            <pre><code class="language-html">
+        &lt;!-- ページネーション --&gt;
+          &lt;div class=&quot;swiper-pagination&quot;&gt;&lt;/div&gt;
+        </code></pre>
+                            <pre><code class="language-javascript">
+        // ページネーション
+          pagination: {
+            el: &quot;.swiper-pagination&quot;,
+            clickable: true, // クリック有効化
+          },
+        </code></pre>
+
+                        </li>
+                    </ul>
+                </article>
+            </section>
+
+            <section>
+                <h2 class="section-title">◎課題点</h2>
+                <p>機能が豊富なためすべてを使いこなすにはそれなりの学習コストが必要なことやモダンブラウザが中心であることなどが挙げられます。
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="f-wrap">
+            <nav class="f-nav">
+                <ul>
+                    <li><a href="css-only-hamburger-menu.html">topic1</a></li>
+                    <li><a href="#">topic2</a></li>
+                    <li><a href="#">topic3</a></li>
+                    <li><a href="#">topic4</a></li>
+                </ul>
+            </nav>
+            <p class="f-copy"><small>&copy; 2025 DAISUKE TAKETOMI</small></p>
+        </div>
+
+
+    </footer>
+
+    <!-- swiper.jsの読み込み -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
+    <!-- ハイライト処理JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <!-- ページ初期化JS -->
+    <script>hljs.highlightAll();</script>
+
+    <script src="js/index.js"></script>
+</body>
+
+</html>

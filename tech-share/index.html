@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <!-- 正しく設定しないと文字化けする -->
+    <meta charset="UTF-8">
+    <!-- レスポンシブ対応させるため -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 検索結果に表示される説明 -->
+    <meta name="description" content="WEBページの説明文">
+
+    <!-- ブラウザのタブに表示される名前 -->
+    <title>WEBサイト制作の技術シェア</title>
+
+    <!-- ファビコンの設定 -->
+    <link rel="icon" href="img/logo5.svg">
+
+    <!-- リセットCSSの読み込み -->
+    <link rel="stylesheet" href="css/destyle.css">
+
+    <!-- Googleフォントの読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Noto Serif JPの読み込み -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap" rel="stylesheet">
+
+    <!-- コードブロックデザインCSS -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+    <!-- 共通CSSの読み込み -->
+    <link rel="stylesheet" href="css/common.css">
+
+    <!-- 個別CSSの読み込み -->
+    <link rel="stylesheet" href="css/top.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="#">
+                <img src="img/logo5.svg" alt="mylogo">
+            </a>
+        </div>
+
+        <div class="hamburger-menu">
+            <input type="checkbox" id="menu-btn-check">
+            <label for="menu-btn-check" class="menu-btn"><span></span></label>
+            <!--ここからメニュー-->
+            <nav class="menu-content">
+                <ul>
+                    <li>
+                        <a href="css-only-hamburger-menu.html">topic1</a>
+                    </li>
+                    <li>
+                        <a href="srider/index.html">topic2</a>
+                    </li>
+                    <li>
+                        <a href="#">topic3</a>
+                    </li>
+                    <li>
+                        <a href="#">topic4</a>
+                    </li>
+                </ul>
+            </nav>
+            <!--ここまでメニュー-->
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="title">
+                <h1>Webサイト制作の技術シェア</h1>
+            </div>
+
+            <div class="articles">
+                <div class="article-item">
+                    <a href="css-only-hamburger-menu.html">
+                        <div class="article-number">01</div>
+                        <h2 class="article-title">ハンバーガーメニューをCSSだけで作る方法</h2>
+                        <p class="article-description">
+                            ナビゲーションボタンをSPで効率的に格納するハンバーガーメニューをJavaScriptを一切使用せず、CSSとHTMLのみで実装する方法をご紹介します。</p>
+                    </a>
+                </div>
+
+                <div class="article-item">
+                    <a href="srider.html">
+                        <div class="article-number">02</div>
+                        <h2 class="article-title">Swiper.jsを用いたスライダーの実装方法</h2>
+                        <p class="article-description">
+                            JavaScriptライブラリを用いることにより必要な機能の簡易実装が可能です。また、他ライブラリとのモバイルファーストにおける差別化が挙げられるため今回紹介します。</p>
+                    </a>
+                </div>
+
+                <div class="article-item">
+                    <a href="#">
+                        <div class="article-number">03</div>
+                        <h2 class="article-title">今後のお楽しみ(^^)/</h2>
+                        <p class="article-description">今後のお楽しみ(^^)/</p>
+                    </a>
+                </div>
+
+                <div class="article-item">
+                    <a href="#">
+                        <div class="article-number">04</div>
+                        <h2 class="article-title">今後のお楽しみ(^^)/</h2>
+                        <p class="article-description">今後のお楽しみ(^^)/</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <footer>
+        <div class="f-wrap">
+            <nav class="f-nav">
+                <ul>
+                    <li><a href="css-only-hamburger-menu.html">topic1</a></li>
+                    <li><a href="srider.html">topic2</a></li>
+                    <li><a href="#">topic3</a></li>
+                    <li><a href="#">topic4</a></li>
+                </ul>
+            </nav>
+            <p class="f-copy"><small>&copy; 2025 DAISUKE TAKETOMI</small></p>
+        </div>
+
+
+    </footer>
+</body>
+
+</html>
+
+<body>
