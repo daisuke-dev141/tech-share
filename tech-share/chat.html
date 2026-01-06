@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <!-- 正しく設定しないと文字化けする -->
+    <meta charset="UTF-8">
+    <!-- レスポンシブ対応させるため -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 検索結果に表示される説明 -->
+    <meta name="description" content="WEBページの説明文">
+
+    <!-- ブラウザのタブに表示される名前 -->
+    <title>WEBサイト制作の技術シェア</title>
+
+    <!-- ファビコンの設定 -->
+    <link rel="icon" href="img/logo5.svg">
+
+    <!-- リセットCSSの読み込み -->
+    <link rel="stylesheet" href="css/destyle.css">
+
+    <!-- Googleフォントの読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Noto Serif JPの読み込み -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap" rel="stylesheet">
+
+    <!-- コードブロックデザインCSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/vs.min.css">
+
+
+    <!-- 共通CSSの読み込み -->
+    <link rel="stylesheet" href="css/common.css">
+
+    <!-- 個別CSSの読み込み -->
+    <link rel="stylesheet" href="css/chat.css">
+
+
+
+
+
+
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="img/logo5.svg" alt="mylogo">
+            </a>
+        </div>
+
+        <div class="hamburger-menu">
+            <input type="checkbox" id="menu-btn-check">
+            <label for="menu-btn-check" class="menu-btn"><span></span></label>
+            <!--ここからメニュー-->
+            <nav class="menu-content">
+                <ul>
+                    <li>
+                        <a href="css-only-hamburger-menu.html">topic1</a>
+                    </li>
+                    <li>
+                        <a href="srider.html">topic2</a>
+                    </li>
+                    <li>
+                        <a href="#">topic3</a>
+                    </li>
+                    <li>
+                        <a href="#">topic4</a>
+                    </li>
+                </ul>
+            </nav>
+            <!--ここまでメニュー-->
+        </div>
+    </header>
+
+    <main>
+        <div class="wrap">
+            <h1 class="title">PHPを用いた<span class="nowrap">chatアプリの実装について</span></h1>
+
+            <section>
+                <h2 class="section-title">◎今回伝えたいこと</h2>
+
+                <p>これまでフロントの部分を重点的に触って、現在バックを勉強してる最中ですが結局どんなことができるのかということを知るためによく見るchatアプリをphpとmysqlを用いて実装したので紹介したいと思います。
+                </p>
+            </section>
+
+            <section>
+                <h2 class="section-title">◎テーマを決めた背景</h2>
+                <p>PHPの学習を始めるにあたり、基礎となる『データの送受信』と『データベースへの保存』の流れを体系的に理解することを目的に、本アプリを制作しました。Webアプリケーションの根幹となる仕組みが凝縮されたチャットアプリを題材に選ぶことで、初心者としてまず習得すべき基本スキルの定着を図りました。
+                </p>
+            </section>
+
+            <section>
+                <h2 class="section-title">◎技術内容</h2>
+
+                <p>作ったアプリの見た目は以下の様になっています。</p>
+                <div class="img-wrap">
+                    <img src="img/chatapp.png" alt="">
+                </div>
+
+                <!-- コードの流れ -->
+                <article>
+                    <h3 class="article-title">◆プログラムの処理フロー</h3>
+                    <p>大きく分けて4つで構成されています。</p>
+                    <div class="flow-wrap">
+                        <ul>
+                            <li>①データベース（MySQL）との接続</li>
+                            <li>②投稿データのバリデーションと保存</li>
+                            <li>③表示用データの取得</li>
+                            <li>④HTMLへの動的な出力</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!--接続について-->
+                <article>
+                    <h3 class="article-title">①データベース（MySQL）との接続</h3>
+                    <p>PDOインスタンスを生成し、掲示板のデータを管理するデータベースへ接続します。接続エラーが発生した場合には、例外処理（try-catch）を用いて適切にエラーメッセージを表示するようにしています。</p>
+                    <pre><code class="language-php">
+        //DB接続
+        try {
+        $pdo = new PDO('mysql:host=localhost;dbname=bbs-yt', &quot;root&quot;, &quot;&quot;);
+        } catch (PDOException $e) {
+        echo $e-&gt;getMessage();
+        }
+                    </code></pre>
+                </article>
+
+                <!--投稿保存について-->
+                <article>
+                    <h3 class="article-title">②投稿データのバリデーションと保存</h3>
+                    <p>ユーザーが「書き込む」ボタンを押した際、入力された「名前」と「コメント」が空でないかをチェックします。問題がなければ、プリペアドステートメントを使用してSQLインジェクション対策を施した上で、データベースへ安全にデータを保存します。</p>
+                    <pre><code class="language-php">
+        //フォームを打ち込んだ時
+        if (!empty($_POST[&quot;submitButton&quot;])) {
+            //名前のチェック
+            if (empty($_POST[&quot;username&quot;])) {
+                echo &quot;名前を入力してください&quot;;
+                $error_messages[&quot;username&quot;] = &quot;名前を入力してください&quot;;
+            }
+            //コメントのチェック
+            if (empty($_POST[&quot;comment&quot;])) {
+                echo &quot;コメントを入力してください&quot;;
+                $error_messages[&quot;comment&quot;] = &quot;コメントを入力してください&quot;;
+            }
+            if (empty($error_messages)) {
+                $postDate = date(&quot;Y-m-d H:i:s&quot;);
+                try {
+                    $stmt = $pdo-&gt;prepare(&quot;INSERT INTO `bbs-table` (`username`, `comment`, `postDate`) VALUES (:username, :comment, :postDate);&quot;);
+                    $stmt-&gt;bindParam(':username', $_POST[&quot;username&quot;]);
+                    $stmt-&gt;bindParam(':comment', $_POST[&quot;comment&quot;]);
+                    $stmt-&gt;bindParam(':postDate', $postDate);
+                    $stmt-&gt;execute();
+                } catch (PDOException $e) {
+                    echo $e-&gt;getMessage();
+                }
+            }
+        }
+        </code></pre>
+                </article>
+
+                <!--データ表示について-->
+                <article>
+                    <h3 class="article-title">③表示用データの取得</h3>
+                    <p>データベースから過去の投稿データ（ID、名前、コメント、投稿日時）を全件取得します。</p>
+                    <pre><code class="language-php">
+        //DBからコメントデータを取得する
+        $sql = &quot;SELECT `id`, `username`, `comment`, `postDate` FROM `bbs-table`;&quot;;
+        $commment_array = $pdo-&gt;query($sql);
+
+        //DBの接続を閉じる
+        $pdo = null;
+        </code></pre>
+                </article>
+
+                <!--動的出力について-->
+                <article>
+                    <h3 class="article-title">④HTMLへの動的な出力</h3>
+                    <p>取得したデータをforeachループを使用してHTML内に展開します。PHPの「別構文（endforeach）」を採用することで、HTML構造の中での視認性を高めています。</p>
+                    <pre><code class="language-html">
+        &lt;!DOCTYPE html&gt;
+        &lt;html lang=&quot;ja&quot;&gt;
+        &lt;head&gt;
+            &lt;meta charset=&quot;UTF-8&quot;&gt;
+            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+            &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+            &lt;title&gt;PHP掲示板&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+            &lt;h1 class=&quot;title&quot;&gt;PHPで掲示板アプリ&lt;/h1&gt;
+            &lt;hr&gt;
+            &lt;div class=&quot;boardWrapper&quot;&gt;
+                &lt;section&gt;
+                    &lt;?php foreach ($commment_array as $commment): ?&gt;
+                        &lt;article&gt;
+                            &lt;div class=&quot;wrapper&quot;&gt;
+                                &lt;div class=&quot;nameArea&quot;&gt;
+                                    &lt;span&gt;名前:&lt;/span&gt;
+                                    &lt;p class=&quot;username&quot;&gt;&lt;?php echo $commment[&quot;username&quot;] ?&gt;&lt;/p&gt;
+                                    &lt;time&gt;&lt;?php echo $commment[&quot;postDate&quot;] ?&gt;&lt;/time&gt;
+                                &lt;/div&gt;
+                                &lt;p class=&quot;comment&quot;&gt;&lt;?php echo $commment[&quot;comment&quot;] ?&gt;&lt;/p&gt;
+                            &lt;/div&gt;
+                        &lt;/article&gt;
+                    &lt;?php endforeach; ?&gt;
+                    &lt;form class=&quot;formWrapper&quot; method=&quot;POST&quot;&gt;
+                        &lt;div&gt;
+                            &lt;input type=&quot;submit&quot; value=&quot;書き込む&quot; name=&quot;submitButton&quot;&gt;
+                            &lt;label for=&quot;&quot;&gt;名前 : &lt;/label&gt;
+                            &lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;
+                        &lt;/div&gt;
+                        &lt;div&gt;
+                            &lt;textarea class=&quot;commentTextArea&quot; name=&quot;comment&quot;&gt;&lt;/textarea&gt;
+                        &lt;/div&gt;
+                    &lt;/form&gt;
+                &lt;/section&gt;
+            &lt;/div&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+        </code></pre>
+                </article>
+            </section>
+
+            <section>
+                <h2 class="section-title">◎課題点</h2>
+                <p>ユーザーが入力した文字をそのまま表示しているため、悪意のあるプログラム（JavaScriptなど）が投稿されると実行されてしまう危険があります(XSS(クロスサイトスクリプティング)対策のためにサニタイズ処理が必要)。
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="f-wrap">
+            <nav class="f-nav">
+                <ul>
+                    <li><a href="css-only-hamburger-menu.html">topic1</a></li>
+                    <li><a href="srider.html">topic2</a></li>
+                    <li><a href="#">topic3</a></li>
+                    <li><a href="#">topic4</a></li>
+                </ul>
+            </nav>
+            <p class="f-copy"><small>&copy; 2025 DAISUKE TAKETOMI</small></p>
+        </div>
+
+    </footer>
+
+    <!-- ハイライト処理JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <!-- ページ初期化JS -->
+    <script>hljs.highlightAll();</script>
+
+    <script src="js/countdown.js"></script>
+
+</body>
+
+</html>
